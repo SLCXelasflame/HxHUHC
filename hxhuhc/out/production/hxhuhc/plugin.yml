@@ -1,0 +1,11 @@
+name: HxH
+version: '1.0'
+main: fr.xelasflame.hxhuhc.Main
+api-version: 1.8.8
+authors: [Xelasflame]
+description: HxH uhc de Xelasflame
+commands:
+  host:
+    description: gère les commandes relatives a la gestion de l' uhc
+  hxh:
+    description: gère les commandes relatives a hxh uhc
