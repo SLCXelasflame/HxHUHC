@@ -16,7 +16,6 @@ public class InGameCommands implements CommandExecutor {
                 Player player = ((Player) sender).getPlayer();
                     if (index.equalsIgnoreCase("hxh")){
                         if(label[0].equalsIgnoreCase("role")){
-                            RoleManager.setRole(player, "test");
                             player.sendMessage(RoleManager.getdescription(player));
                         }
                         else {

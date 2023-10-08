@@ -22,6 +22,7 @@ public class GameManager {
         clearAllEffects(player);
         player.setMaxHealth(20.0);
         player.setHealth(20.0);
+        player.setFoodLevel(20);
         Inventory inv = player.getInventory();
         inv.setItem(0, new ItemStack(Material.BAKED_POTATO, 64));
         inv.setItem(1, new ItemStack(Material.BOOK, 3));

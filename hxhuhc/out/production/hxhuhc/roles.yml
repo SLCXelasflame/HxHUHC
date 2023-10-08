@@ -1,3 +1,10 @@
-test:
-  description: test
-  team: gentil
+roles:
+  Role1:
+    description: Description du role 1
+    camp: Camp du role 1
+  Role2:
+    description: Description du role 2
+    camp: Camp du role 2
+  Role3:
+    description: Description du role 3
+    camp: Camp du role 3

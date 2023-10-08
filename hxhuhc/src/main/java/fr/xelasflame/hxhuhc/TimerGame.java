@@ -57,6 +57,12 @@ public class TimerGame {
                             player.setHealth(20.0);
                         }
                     }
+                    else if (globaltimer == 20*60){
+                        for (Player player: Bukkit.getOnlinePlayers()) {
+                            player.setHealth(20.0);
+                        }
+                        RoleManager.setRoleAll();
+                    }
                     if (secondsRemaining > 0) {
                         updateScoreboard();
                         secondsRemaining--;
