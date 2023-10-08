@@ -9,6 +9,7 @@ public class Main extends JavaPlugin {
 
         @Override
         public void onEnable() {
+            Bukkit.getWorld("world").setPVP(false);
             getLogger().info("Le plugin hunter x hunter uhc a ete active !");
             Bukkit.getWorld("world").getWorldBorder().setSize(4096);
             getCommand("host").setExecutor(new ManagerCommands());

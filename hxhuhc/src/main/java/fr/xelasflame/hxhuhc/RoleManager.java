@@ -2,9 +2,12 @@ package fr.xelasflame.hxhuhc;
 
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.bukkit.Bukkit;
+import org.bukkit.PortalType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,24 +75,45 @@ public class RoleManager {
     }
 
     public static void setRoleAll(){
-        ConfigurationSection roleSection = roleinfo.getConfigurationSection("roles");
-        ArrayList<String> roleNames = new ArrayList<>(roleSection.getKeys(false));
+        ConfigurationSection roleliste = roleinfo.getConfigurationSection("roles");
+        ArrayList<String> roleNames = new ArrayList<>(roleliste.getKeys(false));
         if (roleNames.size() < Bukkit.getOnlinePlayers().size()) {
             Bukkit.broadcastMessage("Il y a trop de joueurs dans la partie");
             return;
         }
         shuffleArray(roleNames);
         int i = 0;
+
         for (Player player : Bukkit.getOnlinePlayers()
                 ) {
-                String description = roleSection.getString(roleNames.get(i) +".description");
-                String camp = roleSection.getString(roleNames.get(i) +".team");
+                ConfigurationSection roleSection = roleliste.getConfigurationSection(roleNames.get(i));
+                List<String> itemNames = roleSection.getStringList("items");
+                List<String> effectStrings = roleSection.getStringList("effects");
+                String description = roleSection.getString("description");
+                String camp = roleSection.getString("team");
 
                 player.sendMessage(roleNames.get(i));
                 player.sendMessage(description);
                 player.sendMessage(camp);
                 setRole(player, roleNames.get(i));
-                setTeam(player, roleSection.getString(roleNames.get(i) + ".camp"));
+                setTeam(player, roleSection.getString("camp"));
                 i++;
+
+            for (String itemName : itemNames) {
+                player.getInventory().addItem(ItemManager.itemliste.get(itemName));
+            }
+
+            for (String effectString : effectStrings) {
+                String[] parts = effectString.split(",");
+                if (parts.length == 3) {
+                    String effectType = parts[0];
+                    int duration = Integer.parseInt(parts[1]);
+                    int amplifier = Integer.parseInt(parts[1]);
+                    PotionEffectType potionEffectType = PotionEffectType.getByName(effectType);
+                    if (potionEffectType != null) {
+                        player.addPotionEffect(new PotionEffect(potionEffectType, duration * 20, amplifier));
+                    }
+                }
+            }
         }}}
 

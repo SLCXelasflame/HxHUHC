@@ -56,10 +56,13 @@ public class TimerGame {
                         for (Player player: Bukkit.getOnlinePlayers()) {
                             player.setHealth(20.0);
                         }
-                    }
-                    else if (globaltimer == 20*60){
+                    } else if (globaltimer == 10*60) {
+                        Bukkit.broadcastMessage("Pvp et annonce des roles dans 10 min");
+                        
+                    } else if (globaltimer == 20*60){
                         for (Player player: Bukkit.getOnlinePlayers()) {
                             player.setHealth(20.0);
+                            Bukkit.getWorld("world").setPVP(true);
                         }
                         RoleManager.setRoleAll();
                     }
